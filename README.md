@@ -62,3 +62,5 @@ terraform apply -auto-approve
 ## Cleanup
 aws ec2 terminate-instances --instance-ids $EC_INSTANCE_ID
 aws ec2 delete-security-group --group-id $AWS_DEFAULT_SG
+
+# Scenario 2 - Use a Golden Image in a Workflow
