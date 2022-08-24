@@ -27,7 +27,7 @@ source "amazon-ebs" "ubuntu-server-east" {
   ssh_agent_auth = false
   ami_name       = "rryjewski-hashicups-demo-{{timestamp}}_v${var.version}"
   tags           = var.aws_tags
-    // ami_regions     = ["us-east-1", "us-east-2"] //Commented out to speed debugging
+  ami_regions     = ["us-east-1", "us-east-2"]
   skip_create_ami = false
 }
 
