@@ -20,6 +20,7 @@
 
 provider "hcp" {}
 
+# Lookup Prod Image
 data "hcp_packer_image" "ubuntu" {
   bucket_name    = "hashicups-frontend-ubuntu"
   channel        = "prod"
