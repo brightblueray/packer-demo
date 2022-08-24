@@ -15,7 +15,6 @@ terraform {
     hcp = {
       source = "hashicorp/hcp"
     }
-
   }
 }
 
