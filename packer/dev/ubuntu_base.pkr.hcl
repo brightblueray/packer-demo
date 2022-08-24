@@ -79,7 +79,7 @@ build {
       "sudo cp /tmp/setup-deps-hashicups.sh /var/lib/cloud/scripts/per-boot/setup-deps-hashicups.sh",
     ]
   }
-  
+
   // // -deprovision vs -deprovision+user : The latter removes all user accounts
   // provisioner "shell" {
   //   only = ["source.azure-arm.ubuntu-server-east"]
