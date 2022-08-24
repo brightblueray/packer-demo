@@ -17,8 +17,8 @@ packer validate .
 packer build .
 
 ## Deploy the image using AWS CLI
-- Lookup AMI ID from HCP Packer eg ami-0ee60e9b285814f54
-export IMAGE_ID=ami-0ee60e9b285814f54
+- Lookup AMI ID from HCP Packer eg ami-039854bbff0f06138
+export IMAGE_ID=ami-039854bbff0f06138
 
 ## We need to declare an AWS EC2 security group
 aws ec2 create-security-group \
@@ -44,8 +44,10 @@ aws ec2 run-instances \
 --associate-public-ip-address \
 --security-group-ids $AWS_DEFAULT_SG | jq -r
 
+export EC2_INSTANCE_ID=i-02338db705893d33a
+
 export EC2_INSTANCE_IP=$( aws ec2 describe-instances \
-  --filters "Name=private-ip-address,Values=172.31.1.249" \
+  --filters "Name=instance-id,Values=$EC_INSTANCE_ID" \
   | jq -r '.Reservations | .[].Instances | .[].PublicIpAddress')
 
 export URL="http://${EC2_INSTANCE_IP}"
@@ -60,7 +62,13 @@ terraform init
 terraform apply -auto-approve
 
 ## Cleanup
-aws ec2 terminate-instances --instance-ids $EC_INSTANCE_ID
+aws ec2 terminate-instances --instance-ids $EC2_INSTANCE_ID
 aws ec2 delete-security-group --group-id $AWS_DEFAULT_SG
 
 # Scenario 2 - Use a Golden Image in a Workflow
+Make a VCS change to prod and trigger a build.
+- The responsibility has been seperated
+
+# Scenario 3 - 
+TFC and HCP Packer 
+Scale and Governance
