@@ -36,7 +36,6 @@ source "azure-arm" "ubuntu-server-east" {
   subscription_id = "${var.subscription_id}"
   client_secret   = "${var.client_secret}"
   location        = "eastus2"
-  #build_resource_group_name = "${var.resource_group}"
 
   os_type         = "Linux"
   os_disk_size_gb = 50

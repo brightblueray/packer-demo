@@ -38,16 +38,16 @@ aws ec2 authorize-security-group-ingress \
 --cidr 0.0.0.0/0
 
 ## Launch a bare bones, free-range, glutten-free AWS EC2 instance
-aws ec2 run-instances \
+export EC2_INSTANCE_ID=$(aws ec2 run-instances \
 --image-id $IMAGE_ID \
 --instance-type t2.micro \
 --associate-public-ip-address \
---security-group-ids $AWS_DEFAULT_SG | jq -r
+--security-group-ids $AWS_DEFAULT_SG | jq -r '.Instances[].InstanceId')
 
-export EC2_INSTANCE_ID=i-02338db705893d33a
+echo $EC2_INSTANCE_ID
 
 export EC2_INSTANCE_IP=$( aws ec2 describe-instances \
-  --filters "Name=instance-id,Values=$EC_INSTANCE_ID" \
+  --filters "Name=instance-id,Values=$EC2_INSTANCE_ID" \
   | jq -r '.Reservations | .[].Instances | .[].PublicIpAddress')
 
 export URL="http://${EC2_INSTANCE_IP}"
