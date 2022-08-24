@@ -6,7 +6,6 @@
     }
   }
 
-
   required_providers {
 
     aws = {
